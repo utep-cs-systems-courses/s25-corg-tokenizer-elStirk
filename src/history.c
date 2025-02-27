@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "tokenizer.h"
 
 typedef struct s_Item{
   int id;
@@ -18,6 +19,13 @@ List* init_history(){
   return list;
 }
 
+short str_len(char *str){
+  short len = 0;
+  while(str[len] != '\0'){
+    len++;
+  }
+  return len;
+}
 void add_history(List *list, char *str){
 
   if(list == NULL || str == NULL)return;
@@ -25,7 +33,9 @@ void add_history(List *list, char *str){
   Item *new_item = malloc(sizeof(Item));
   if(new_item == NULL) return;
 
-  new_item->str = str;
+  short length = str_len(str);
+
+  new_item->str = copy_str(str, length);
   new_item->next = NULL;
 
   if(list->root == NULL){
@@ -63,7 +73,7 @@ void print_history(List *list) {
 
   Item *current = list->root;
   while (current != NULL) {
-    printf("ID: %d, String: %s\n", current->id, current->str);
+    printf("[!] %d -> %s\n", current->id, current->str);
     current = current->next;
   }
 }

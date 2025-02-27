@@ -89,7 +89,7 @@ void print_tokens(char **tokens){
   if(tokens == NULL)return;
 
   for(short i = 0; tokens[i] != 0; i++){
-    printf("%s\n", tokens[i]);
+    printf("arg[%d] = %s\n", i, tokens[i]);
   }
 }
 
@@ -101,14 +101,3 @@ void free_tokens(char **tokens){
   free(tokens);
 }
 
-int main(){
-  char papu[] = "Hello my name is Pablo";
-  char **tokens = tokenize(papu);
-
-  if(tokens != NULL){
-    printf("TOKENIZED OUTPUT:\n");
-    print_tokens(tokens);
-    free_tokens(tokens);
-  }
-  return 0;
-}
